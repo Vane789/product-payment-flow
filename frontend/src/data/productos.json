@@ -1,0 +1,26 @@
+[
+    {
+        "id": "01",
+        "name": "producto 1",
+        "img": "src/assets/img/producto1.png",
+        "price": 100,
+        "stock": 10,
+        "description": "Something..."
+    },
+    {
+        "id": "02",
+        "img": "src/assets/img/producto2.png",
+        "name": "producto 2",
+        "price": 200,
+        "stock": 10,
+        "description": "Something 2..."
+    },
+    {
+        "id": "03",
+        "name": "producto 3",
+        "img": "src/assets/img/producto3.png",
+        "price": 100,
+        "stock": 10,
+        "description": "Something 3..."
+    }
+]
