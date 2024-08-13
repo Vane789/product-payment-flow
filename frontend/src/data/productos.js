@@ -1,15 +1,20 @@
-[
+import producto1Image from '../assets/img/producto1.png';
+import producto2Image from '../assets/img/producto2.png';
+import producto3Image from '../assets/img/producto3.png';
+
+
+const dataProducts = [
     {
         "id": "01",
         "name": "producto 1",
-        "img": "src/assets/img/producto1.png",
+        "img": producto1Image,
         "price": 100,
         "stock": 10,
         "description": "Something..."
     },
     {
         "id": "02",
-        "img": "src/assets/img/producto2.png",
+        "img": producto2Image,
         "name": "producto 2",
         "price": 200,
         "stock": 10,
@@ -18,9 +23,11 @@
     {
         "id": "03",
         "name": "producto 3",
-        "img": "src/assets/img/producto3.png",
+        "img": producto3Image,
         "price": 100,
         "stock": 10,
         "description": "Something 3..."
     }
 ]
+
+export default dataProducts;
