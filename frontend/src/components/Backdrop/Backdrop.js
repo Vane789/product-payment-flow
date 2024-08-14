@@ -6,11 +6,15 @@ import {
   Grid,
   Divider,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import "./Backdrop.scss";
+import { useNavigate } from "react-router-dom";
 
 const Summary = () => {
   const [cartItems, setCartItems] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -26,6 +30,17 @@ const Summary = () => {
 
   const shippingCost = 5000;
   const totalAmount = calculateTotal() + shippingCost;
+
+  const handlePayment = () => {
+    setLoading(true);
+
+    //API proceso de pago
+    setTimeout(() => {
+      // Después de la operación de pago
+      setLoading(false);
+      navigate("/final-status");
+    }, 2000);
+  };
 
   return (
     <Card className="card">
@@ -70,9 +85,20 @@ const Summary = () => {
           <Typography variant="h6" className="total">
             Total: ${totalAmount}
           </Typography>
-          <Button variant="contained" color="primary" className="button">
-            Payment
-          </Button>
+          {loading ? (
+            <div className="loading-container">
+              <CircularProgress color="inherit" />
+            </div>
+          ) : (
+            <Button
+              variant="contained"
+              color="primary"
+              className="button"
+              onClick={handlePayment}
+            >
+              Payment
+            </Button>
+          )}
         </div>
       </CardContent>
     </Card>

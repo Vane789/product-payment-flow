@@ -58,3 +58,11 @@
   background-color: $secondary-color !important;
   color: $color-white;
 }
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 16px 0;
+  color: $secondary-color;
+}
