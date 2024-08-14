@@ -1,7 +1,12 @@
 import React from "react";
+import Header from "../components/Header/Header";
 
 function PaymentPage() {
-  return <div>PaymentPage</div>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 }
 
 export default PaymentPage;

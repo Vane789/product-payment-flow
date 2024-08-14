@@ -9,16 +9,19 @@ import {
 } from "@mui/material";
 import RemoveIcon from "@mui/icons-material/Remove";
 import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
 import "./ProductCard.scss";
 
 const ProductCard = ({
-  ToPay,
+  showButtonToPay,
   product,
   quantity,
   onQuantityChange,
   onAddToCart,
+  isCartPage,
+  onDelete,
 }) => (
-  <Card className="product-card">
+  <Card className={`product-card`}>
     <CardMedia
       component="img"
       className="product-media"
@@ -45,7 +48,17 @@ const ProductCard = ({
         <AddIcon />
       </IconButton>
     </div>
-    {ToPay && (
+    {isCartPage && (
+      <div>
+        <IconButton
+          className="delete-icon"
+          onClick={() => onDelete(product.id)}
+        >
+          <DeleteIcon />
+        </IconButton>
+      </div>
+    )}
+    {showButtonToPay && !isCartPage && (
       <Button
         className="add-to-cart-button"
         variant="contained"

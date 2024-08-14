@@ -7,6 +7,7 @@ import ProductCard from "../components/ProductCard/ProductCard";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import Grid from "@mui/material/Grid";
+import { initializeCart } from "../store/actions/carAction";
 
 function ProductPage() {
   const [products, setProducts] = useState([]);
@@ -14,10 +15,19 @@ function ProductPage() {
   const dispatch = useDispatch();
   const [countProducts, setCountProducts] = useState(0);
   const [open, setOpen] = useState(false);
+  const [test, setTest] = useState(0);
 
   useEffect(() => {
     setProducts(getProducts());
   }, []);
+
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("carrito")) || [];
+    if (storedCart.length > 0) {
+      dispatch(initializeCart(storedCart));
+      setTest(storedCart.length);
+    }
+  }, [dispatch, countProducts]);
 
   function handleAddToCart(product) {
     const quantity = quantities[product.id] || 0;
@@ -29,6 +39,7 @@ function ProductPage() {
         [product.id]: 0,
       }));
       setOpen(true);
+
       setCountProducts(countProducts + 1);
     }
   }
@@ -49,14 +60,14 @@ function ProductPage() {
 
   return (
     <>
-      <Header cartCount={countProducts} />
+      <Header cartCount={test} />
       <h1>Amigurumis</h1>
       <Grid sx={{ flexGrow: 1 }} container spacing={2}>
         {products.map((product) => (
           <Grid item xs={12} sm={6} md={4} key={product.id}>
             <Grid container justifyContent="center">
               <ProductCard
-                ToPay={true}
+                showButtonToPay={true}
                 product={product}
                 quantity={quantities[product.id] || 0}
                 onQuantityChange={handleQuantityChange}

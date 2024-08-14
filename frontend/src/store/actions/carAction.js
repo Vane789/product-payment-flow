@@ -12,3 +12,8 @@ export const updateItemQuantity = (id, quantity) => ({
   type: "UPDATE_ITEM_QUANTITY",
   payload: { id, quantity },
 });
+
+export const initializeCart = (items) => ({
+  type: "INITIALIZE_CART",
+  payload: items,
+});

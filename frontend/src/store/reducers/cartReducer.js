@@ -9,39 +9,59 @@ const cartReducer = (state = initialState, action) => {
         (item) => item.id === action.payload.id
       );
 
+      let updatedCart;
       if (itemIndex >= 0) {
-        const updatedCart = state.cart.map((item, index) =>
+        updatedCart = state.cart.map((item, index) =>
           index === itemIndex
             ? { ...item, quantity: item.quantity + action.payload.quantity }
             : item
         );
-
-        return {
-          ...state,
-          cart: updatedCart,
-        };
       } else {
-        return {
-          ...state,
-          cart: [
-            ...state.cart,
-            { ...action.payload, quantity: action.payload.quantity },
-          ],
-        };
+        updatedCart = [
+          ...state.cart,
+          { ...action.payload, quantity: action.payload.quantity },
+        ];
       }
-    case "REMOVE_ITEM":
+
+      localStorage.setItem("carrito", JSON.stringify(updatedCart));
+
       return {
         ...state,
-        cart: state.cart.filter((item) => item.id !== action.payload),
+        cart: updatedCart,
       };
-    case "UPDATE_ITEM_QUANTITY":
+
+    case "REMOVE_ITEM":
+      const cartAfterRemoval = state.cart.filter(
+        (item) => item.id !== action.payload
+      );
+
+      localStorage.setItem("carrito", JSON.stringify(cartAfterRemoval));
+
       return {
         ...state,
-        cart: state.cart.map((item) =>
-          item.id === action.payload.id
-            ? { ...item, quantity: action.payload.quantity }
-            : item
-        ),
+        cart: cartAfterRemoval,
+      };
+
+    case "UPDATE_ITEM_QUANTITY":
+      const cartWithUpdatedQuantity = state.cart.map((item) =>
+        item.id === action.payload.id
+          ? { ...item, quantity: action.payload.quantity }
+          : item
+      );
+
+      localStorage.setItem("carrito", JSON.stringify(cartWithUpdatedQuantity));
+
+      return {
+        ...state,
+        cart: cartWithUpdatedQuantity,
+      };
+
+    case "INITIALIZE_CART":
+      localStorage.setItem("carrito", JSON.stringify(action.payload));
+
+      return {
+        ...state,
+        cart: action.payload,
       };
 
     default:
