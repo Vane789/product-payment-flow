@@ -1,0 +1,28 @@
+@use "../abstracts/variables" as *;
+
+.header {
+  .MuiToolbar-root {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $primary-color;
+  }
+
+  .logo {
+    flex: 1;
+    text-align: center;
+  }
+
+  .cart-button {
+    margin-left: auto;
+  }
+
+  .no-link-style {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .no-link-style:hover {
+    color: inherit;
+  }
+}
