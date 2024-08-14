@@ -12,6 +12,7 @@ import {
   InputLabel,
   FormControl,
   OutlinedInput,
+  InputAdornment,
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -19,6 +20,8 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import visaLogo from "../../assets/img/visa-logo.png";
 import masterCardLogo from "../../assets/img/mastercard-logo.png";
 import "./CreditCardModal.scss";
+import creditCardType from "credit-card-type";
+import { getCardLogo } from "../../utils/getCardLogo";
 
 const currentYear = new Date().getFullYear();
 const years = Array.from(new Array(20), (val, index) => currentYear + index);
@@ -29,6 +32,21 @@ const menuProps = {
       maxHeight: 200,
     },
   },
+};
+
+const isValidCreditCardNumber = (number) => {
+  const card = creditCardType(number)[0];
+  return card && (card.type === "visa" || card.type === "mastercard");
+};
+
+const isValidExpiryDate = (month, year) => {
+  const currentDate = new Date();
+  const cardExpiryDate = new Date(year, month - 1);
+  return cardExpiryDate >= currentDate;
+};
+
+const isValidCVV = (cvv) => {
+  return /^[0-9]{3,4}$/.test(cvv);
 };
 
 const CreditCardModal = ({ open, handleClose }) => {
@@ -45,10 +63,27 @@ const CreditCardModal = ({ open, handleClose }) => {
       acceptTerms: false,
     },
     validationSchema: Yup.object({
-      cardNumber: Yup.string().required("Número de tarjeta es requerido"),
-      expirationMonth: Yup.string().required("Mes de expiración es requerido"),
+      cardNumber: Yup.string()
+        .required("Número de tarjeta es requerido")
+        .test(
+          "valid-card-number",
+          "Número de tarjeta inválido",
+          isValidCreditCardNumber
+        ),
+      expirationMonth: Yup.string()
+        .required("Mes de expiración es requerido")
+        .test(
+          "valid-expiration",
+          "Fecha de expiración inválida",
+          function (value) {
+            const { expirationYear } = this.parent;
+            return isValidExpiryDate(value, expirationYear);
+          }
+        ),
       expirationYear: Yup.string().required("Año de expiración es requerido"),
-      cvv: Yup.string().required("CVV es requerido"),
+      cvv: Yup.string()
+        .required("CVV es requerido")
+        .test("valid-cvv", "CVV inválido", isValidCVV),
       cardholderName: Yup.string().required(
         "Nombre en la tarjeta es requerido"
       ),
@@ -62,7 +97,6 @@ const CreditCardModal = ({ open, handleClose }) => {
     }),
     onSubmit: (values) => {
       console.log("Formulario de tarjeta enviado:", values);
-      // Aquí enviarías la información al servidor
       handleClose();
     },
   });
@@ -100,6 +134,20 @@ const CreditCardModal = ({ open, handleClose }) => {
                 helperText={
                   formik.touched.cardNumber && formik.errors.cardNumber
                 }
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      {formik.values.cardNumber &&
+                        getCardLogo(formik.values.cardNumber) && (
+                          <img
+                            src={getCardLogo(formik.values.cardNumber)}
+                            alt="Card Logo"
+                            style={{ width: "40px" }}
+                          />
+                        )}
+                    </InputAdornment>
+                  ),
+                }}
               />
             </Grid>
             <Grid item xs={6}>
