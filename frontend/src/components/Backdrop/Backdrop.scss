@@ -1,0 +1,60 @@
+@use "../../scss/abstracts/variables" as *;
+
+.card {
+  background-color: $color-white;
+  border-radius: $border-radius-card;
+  box-shadow: $box-shadow-card;
+  padding: 16px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.typography {
+  color: $text-color-description;
+  font-family: $font-varela;
+}
+
+.item-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titles {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  margin-top: 20px;
+  margin-left: 15px;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.divider {
+  margin: 16px 0;
+}
+
+.grid-container {
+  margin-bottom: 16px;
+}
+
+.grid-item {
+  margin-bottom: 8px;
+}
+
+.card-total {
+  text-align: right;
+}
+
+.total {
+  font-weight: bold !important;
+}
+
+.button {
+  border-radius: $border-radius-button !important;
+  background-color: $secondary-color !important;
+  color: $color-white;
+}
