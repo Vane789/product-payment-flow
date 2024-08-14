@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { initializeCart } from "../store/actions/carAction";
 import { getCartItems } from "../utils/getCarItem";
 import Header from "../components/Header/Header";
+import CreditCardModal from "../components/Modal/CreditCardModal";
 import "../index.scss";
 import { TextField, Grid, Button, Container, Paper } from "@mui/material";
 import { useFormik } from "formik";
@@ -23,6 +24,7 @@ const validationSchema = Yup.object({
 const PaymentPage = () => {
   const dispatch = useDispatch();
   const [carItem, setCarItem] = useState(0);
+  const [isModalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     setCarItem(getCartItems(dispatch, initializeCart));
@@ -42,7 +44,7 @@ const PaymentPage = () => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       console.log("Formulario enviado:", values);
-      // enviar a un servidor
+      setModalOpen(true);
     },
   });
 
@@ -179,6 +181,10 @@ const PaymentPage = () => {
           </form>
         </Paper>
       </Container>
+      <CreditCardModal
+        open={isModalOpen}
+        handleClose={() => setModalOpen(false)}
+      />
     </>
   );
 };
