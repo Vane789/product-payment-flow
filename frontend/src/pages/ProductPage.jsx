@@ -8,25 +8,22 @@ import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import Grid from "@mui/material/Grid";
 import { initializeCart } from "../store/actions/carAction";
+import { getCartItems } from "../utils/getCarItem";
 
 function ProductPage() {
   const [products, setProducts] = useState([]);
   const [quantities, setQuantities] = useState({});
-  const dispatch = useDispatch();
   const [countProducts, setCountProducts] = useState(0);
   const [open, setOpen] = useState(false);
-  const [test, setTest] = useState(0);
+  const [carItem, setCarItem] = useState(0);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setProducts(getProducts());
   }, []);
 
   useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem("carrito")) || [];
-    if (storedCart.length > 0) {
-      dispatch(initializeCart(storedCart));
-      setTest(storedCart.length);
-    }
+    setCarItem(getCartItems(dispatch, initializeCart));
   }, [dispatch, countProducts]);
 
   function handleAddToCart(product) {
@@ -60,7 +57,7 @@ function ProductPage() {
 
   return (
     <>
-      <Header cartCount={test} />
+      <Header cartCount={carItem} />
       <h1>Amigurumis</h1>
       <Grid sx={{ flexGrow: 1 }} container spacing={2}>
         {products.map((product) => (
