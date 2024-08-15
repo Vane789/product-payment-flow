@@ -42,8 +42,9 @@ const PaymentPage = () => {
       details: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      console.log("Formulario enviado:", values);
+    onSubmit: (userPayload) => {
+      localStorage.setItem("userPayload", JSON.stringify(userPayload));
+      console.log("Formulario enviado:", userPayload);
       setModalOpen(true);
     },
   });
@@ -91,7 +92,7 @@ const PaymentPage = () => {
                   name="department"
                   label="Departamento"
                   value={formik.values.department}
-                  InputProps={{ readOnly: true }} // Campo no editable
+                  InputProps={{ readOnly: true }}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>

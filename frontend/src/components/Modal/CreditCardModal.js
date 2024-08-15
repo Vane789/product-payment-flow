@@ -89,8 +89,12 @@ const CreditCardModal = ({ open, handleClose }) => {
         "Debe aceptar los términos y condiciones"
       ),
     }),
-    onSubmit: (values) => {
-      console.log("Formulario de tarjeta enviado:", values);
+    onSubmit: (creditCardPayload) => {
+      localStorage.setItem(
+        "creditCardPayload",
+        JSON.stringify(creditCardPayload)
+      );
+      console.log("Formulario de tarjeta enviado:", creditCardPayload);
       handleClose();
     },
   });

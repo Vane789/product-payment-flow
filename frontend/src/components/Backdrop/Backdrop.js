@@ -32,6 +32,17 @@ const Summary = () => {
   const totalAmount = calculateTotal() + shippingCost;
 
   const handlePayment = () => {
+    //construir todo el json para enviar la peticion
+    const user = JSON.parse(localStorage.getItem("carrito")) || [];
+    const product = JSON.parse(localStorage.getItem("creditCardPayload")) || [];
+    const cart = JSON.parse(localStorage.getItem("userPayload")) || [];
+
+    const test = {
+      user,
+      product,
+      cart,
+    };
+    console.log("payload hacia backend:: ", test);
     setLoading(true);
 
     //API proceso de pago
