@@ -1,0 +1,73 @@
+@use "../../scss/abstracts/variables" as *;
+
+.credit-card-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .modal-content {
+    padding: 20px;
+    background-color: #fff;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      position: relative;
+
+      .back-button {
+        left: 0;
+        top: 10px;
+        color: $secondary-color;
+      }
+
+      h2 {
+        margin-top: 15px;
+        width: 100%;
+        font-weight: 500;
+      }
+    }
+
+    .img-accepted {
+      display: flex;
+      flex-direction: column;
+
+      .accepted-cards-title {
+        margin-top: 10px;
+        font-size: 0.9rem;
+        font-weight: bold;
+      }
+
+      .logos {
+        display: flex;
+        gap: 10px;
+        margin: 10px;
+        align-items: center;
+
+        img {
+          width: 40px;
+          height: auto;
+        }
+
+        img:nth-of-type(1) {
+          width: 40px;
+          height: 20px;
+        }
+      }
+    }
+
+    .payment-button {
+      background-color: $secondary-color;
+      border-radius: $border-radius-button;
+      &:hover {
+        background-color: #d32f2f;
+      }
+    }
+  }
+}
