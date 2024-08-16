@@ -14,7 +14,7 @@ export const getProducts = async () => {
 
 export const postPayment = async (data) => {
   try {
-    const response = await fetch("http://localhost:3000/products", {
+    const response = await fetch("http://localhost:3000/order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
