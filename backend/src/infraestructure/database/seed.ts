@@ -2,7 +2,7 @@ import { AppDataSource } from '../../data-source';
 import { ProductEntity } from '../../domain/entities/product.entity';
 import { v4 as uuidv4 } from 'uuid';
 
-async function seedDatabase() {
+export async function seedDatabase() {
   try {
     await AppDataSource.initialize();
     console.log('Data Source has been initialized.');
@@ -71,5 +71,3 @@ async function seedDatabase() {
     await AppDataSource.destroy();
   }
 }
-
-seedDatabase();

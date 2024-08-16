@@ -8,7 +8,9 @@ export class ProductController {
 
   @Get()
   async getProducts(): Promise<Product[]> {
+    console.log('entro por aca en metodo GET');
     const products = await this.productService.getProducts();
+    console.log('products :: ', products);
     return products.map(
       (product) =>
         new Product(

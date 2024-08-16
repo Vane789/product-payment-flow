@@ -17,11 +17,11 @@ import { ProductRepository } from '../../adapters/outbound/repositories/product.
       password: 'admin',
       database: 'postgres',
       entities: [PaymentEntity, ProductEntity, UserEntity],
-      synchronize: true,
+      synchronize: false,
     }),
-    TypeOrmModule.forFeature([PaymentEntity]),
+    TypeOrmModule.forFeature([ProductEntity]),
   ],
   controllers: [ProductController],
   providers: [ProductService, ProductRepository],
 })
-export class AppModule {}
+export class DatabaseModule {}

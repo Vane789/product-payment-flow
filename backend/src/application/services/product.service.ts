@@ -7,6 +7,7 @@ export class ProductService {
   constructor(private readonly productRepository: ProductRepository) {}
 
   async getProducts(): Promise<ProductEntity[]> {
+    console.log('Llamado a getProducts en ProductService');
     return await this.productRepository.findAll();
   }
 
