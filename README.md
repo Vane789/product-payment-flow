@@ -94,7 +94,6 @@ La aplicación implementa los siguientes requisitos:
 1. Página del producto con información de stock.
 2. Modal para el ingreso de datos de la tarjeta de crédito y la información de entrega.
 3. Resumen del pago y flujo de transacción.
-4. Con
 
 ## Planes Futuros
 
