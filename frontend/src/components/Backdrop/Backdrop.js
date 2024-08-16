@@ -45,9 +45,7 @@ const Summary = () => {
     postPayment(payload);
     setLoading(true);
 
-    //API proceso de pago
     setTimeout(() => {
-      // Después de la operación de pago
       setLoading(false);
       navigate("/final-status");
     }, 2000);
