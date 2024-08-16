@@ -22,18 +22,13 @@ const ProductCard = ({
   onDelete,
 }) => (
   <Card className={`product-card`}>
-    <CardMedia
-      component="img"
-      className="product-media"
-      image={product.img}
-      alt={product.name}
-    />
+    <CardMedia component="img" className="product-media" image={product.img} />
     <CardContent className="product-content">
       <Typography variant="h6" className="product-description">
         {product.description}
       </Typography>
       <Typography variant="h6" className="product-price">
-        ${product.price.toFixed(3)}
+        ${product.price}
       </Typography>
       <Typography variant="body2" className="product-stock">
         Stock: {product.stock}
