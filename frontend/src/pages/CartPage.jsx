@@ -52,7 +52,7 @@ const CartPage = () => {
           <p>El carrito está vacío</p>
         ) : (
           cartItems.map((item) => (
-            <Grid item xs={12} sm={6} md={12} key={item.id}>
+            <Grid item xs={12} sm={6} md={2} key={item.id}>
               <Grid container justifyContent="center">
                 <ProductCard
                   showButtonToPay={false}
