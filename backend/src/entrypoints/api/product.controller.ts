@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 import { ProductService } from '../../application/services/product.service';
 import { Product } from '../../application/model/productDTO';
 
@@ -24,16 +24,11 @@ export class ProductController {
     );
   }
 
-  @Get(':id')
-  async getProduct(@Param('id') id: string): Promise<Product> {
-    const product = await this.productService.getProductById(id);
-    return new Product(
-      product.id,
-      product.img,
-      product.description,
-      product.price,
-      product.stock,
-      product.quantity,
-    );
+  @Post()
+  async create(@Body() createProductDto: any): Promise<Object> {
+    const data = { recibido: 'ok' };
+    console.log('Received data:', createProductDto);
+
+    return data;
   }
 }
