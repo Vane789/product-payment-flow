@@ -31,5 +31,5 @@ export class UserEntity {
   details: string;
 
   @OneToMany(() => OrderEntity, (order) => order.user)
-  orders: OrderEntity[];
+  order: OrderEntity[];
 }

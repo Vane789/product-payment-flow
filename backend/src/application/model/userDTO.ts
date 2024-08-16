@@ -9,9 +9,5 @@ export class User {
     public readonly email: string,
     public readonly shippingAddress: string,
     public readonly details: string,
-  ) {
-    function getId() {
-      return id;
-    }
-  }
+  ) {}
 }

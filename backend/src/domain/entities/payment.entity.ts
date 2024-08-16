@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { OrderEntity } from './order.entity';
 
 @Entity('payment')
@@ -13,7 +13,7 @@ export class PaymentEntity {
   expirationMonth: string;
 
   @Column()
-  expirationYear: string;
+  expirationYear: number;
 
   @Column()
   cvv: string;
@@ -33,6 +33,6 @@ export class PaymentEntity {
   @Column()
   acceptTerms: boolean;
 
-  @ManyToOne(() => OrderEntity, (order) => order.payment)
-  order: OrderEntity;
+  @OneToMany(() => OrderEntity, (order) => order.payment)
+  order: OrderEntity[];
 }

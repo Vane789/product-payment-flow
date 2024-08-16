@@ -1,15 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-  OneToOne,
-  ManyToMany,
-  JoinTable,
-} from 'typeorm';
-import { UserEntity } from './user.entity';
-import { PaymentEntity } from './payment.entity';
-import { ProductEntity } from './product.entity';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity('order')
 export class OrderEntity {
@@ -19,12 +8,12 @@ export class OrderEntity {
   @Column({ default: 'PENDING' })
   status: string;
 
-  @ManyToOne(() => UserEntity, (user) => user.orders)
-  user: UserEntity;
+  @Column()
+  user: string;
 
-  @ManyToOne(() => PaymentEntity, (payment) => payment.order)
-  payment: PaymentEntity;
+  @Column()
+  payment: string;
 
-  @ManyToOne(() => ProductEntity, (product) => product.orders)
-  products: ProductEntity[];
+  @Column()
+  product: string;
 }

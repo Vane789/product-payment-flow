@@ -7,6 +7,7 @@ import { UserEntity } from '../../domain/entities/user.entity';
 import { PaymentEntity } from '../../domain/entities/payment.entity';
 import { ProductEntity } from '../../domain/entities/product.entity';
 import { PaymentModule } from './payment.module';
+import { UserModule } from './user.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { PaymentModule } from './payment.module';
       ProductEntity,
     ]),
     PaymentModule,
+    UserModule,
   ],
   providers: [OrderService],
   controllers: [OrderController],

@@ -21,21 +21,20 @@ export class OrderService {
     private readonly productRepository: Repository<ProductEntity>,
   ) {}
 
-  async createOrder(createOrderDto: Order): Promise<OrderEntity> {
+  async createOrder(createOrderDto: any): Promise<any> {
     const { user, payment, product } = createOrderDto;
+    const productIds = product.map((prod) => prod.id);
 
     const userEntity = await this.userRepository.findOne({
-      where: { id: user.id },
+      where: { id: user },
     });
     const paymentEntity = await this.paymentRepository.findOne({
-      where: { id: payment.id },
+      where: { id: payment },
     });
+
     const productEntities = await this.productRepository.findBy({
-      id: In(product.map((p) => p.id)),
+      id: In(productIds),
     });
-    console.log('userEntity ', userEntity);
-    console.log('paymentEntity ', paymentEntity);
-    console.log('productEntities ', productEntities);
 
     if (!userEntity) {
       throw new Error('User not found');
@@ -49,14 +48,14 @@ export class OrderService {
       throw new Error('Products not found');
     }
 
-    const order = this.orderRepository.create({
-      user: userEntity,
-      payment: paymentEntity,
-      products: productEntities,
-      status: 'PENDING',
-    });
+    const productIdsString = JSON.stringify(productEntities);
+    const test = {
+      user: userEntity.id,
+      payment: paymentEntity.id,
+      product: productIdsString,
+    };
 
-    console.log('order ', order);
+    const order = this.orderRepository.create(test);
 
     return this.orderRepository.save(order);
   }

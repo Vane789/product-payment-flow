@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 import { OrderEntity } from './order.entity';
 
 @Entity('product')
@@ -21,6 +21,6 @@ export class ProductEntity {
   @Column('int')
   quantity: number;
 
-  @ManyToOne(() => OrderEntity, (order) => order.products)
+  @ManyToMany(() => OrderEntity, (order) => order.product)
   orders: OrderEntity[];
 }

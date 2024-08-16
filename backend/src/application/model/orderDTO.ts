@@ -4,8 +4,8 @@ import { Product } from './productdto';
 
 export class Order {
   constructor(
-    public readonly user: User,
-    public readonly payment: Payment,
-    public readonly product: Product[],
+    public readonly user: string,
+    public readonly payment: string,
+    public readonly product: string,
   ) {}
 }
