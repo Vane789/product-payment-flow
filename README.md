@@ -1,6 +1,6 @@
 # Product-payment-flow
 
-Este es un E-commerce de amigurumis desarrollado con React, NestJS y TypeORM. La aplicación consiste en el proceso de compra de un producto(Amigurumis) con pago a tráves del consumo de una API, que incluya la obtención de datos del cliente, validación de pago, actualización de stock y visualización del resultado de la transacción.
+Este proyecto es un E-commerce de amigurumis desarrollado con React, NestJS y TypeORM. La aplicación consiste en el proceso de compra de un producto(Amigurumis) con pago a tráves del consumo de una API, que incluya la obtención de datos del cliente, validación de pago, actualización de stock y visualización del resultado de la transacción.
 
 ## Requisitos
 
