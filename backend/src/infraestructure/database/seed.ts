@@ -71,3 +71,5 @@ export async function seedDatabase() {
     await AppDataSource.destroy();
   }
 }
+
+seedDatabase();
