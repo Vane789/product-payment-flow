@@ -19,7 +19,16 @@ function ProductPage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setProducts(getProducts());
+    const getData = async () => {
+      try {
+        const data = await getProducts();
+        console.log(data);
+        setProducts(data);
+      } catch (error) {
+        console.log("Ocurred something");
+      }
+    };
+    getData();
   }, []);
 
   useEffect(() => {

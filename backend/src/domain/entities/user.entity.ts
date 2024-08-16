@@ -1,6 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { OrderEntity } from './order.entity';
 
-@Entity('products')
+@Entity('user')
 export class UserEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -28,4 +29,7 @@ export class UserEntity {
 
   @Column()
   details: string;
+
+  @OneToMany(() => OrderEntity, (order) => order.user)
+  order: OrderEntity[];
 }

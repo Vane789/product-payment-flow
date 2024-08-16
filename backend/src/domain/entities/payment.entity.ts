@@ -1,7 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { OrderEntity } from './order.entity';
 
-@Entity('products')
-export class ProductEntity {
+@Entity('payment')
+export class PaymentEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -12,7 +13,7 @@ export class ProductEntity {
   expirationMonth: string;
 
   @Column()
-  expirationYear: string;
+  expirationYear: number;
 
   @Column()
   cvv: string;
@@ -31,4 +32,7 @@ export class ProductEntity {
 
   @Column()
   acceptTerms: boolean;
+
+  @OneToMany(() => OrderEntity, (order) => order.payment)
+  order: OrderEntity[];
 }

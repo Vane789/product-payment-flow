@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import "./Backdrop.scss";
 import { useNavigate } from "react-router-dom";
+import { postPayment } from "../../services/api";
 
 const Summary = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -30,24 +31,21 @@ const Summary = () => {
 
   const shippingCost = 5000;
   const totalAmount = calculateTotal() + shippingCost;
-
   const handlePayment = () => {
-    //construir todo el json para enviar la peticion
-    const user = JSON.parse(localStorage.getItem("carrito")) || [];
-    const product = JSON.parse(localStorage.getItem("creditCardPayload")) || [];
-    const cart = JSON.parse(localStorage.getItem("userPayload")) || [];
+    const user = JSON.parse(localStorage.getItem("userPayload")) || [];
+    const payment = JSON.parse(localStorage.getItem("paymentPayload")) || [];
+    const product = JSON.parse(localStorage.getItem("carrito")) || [];
 
-    const test = {
+    const payload = {
       user,
+      payment,
       product,
-      cart,
     };
-    console.log("payload hacia backend:: ", test);
+    console.log("payload hacia backend:: ", payload);
+    postPayment(payload);
     setLoading(true);
 
-    //API proceso de pago
     setTimeout(() => {
-      // Después de la operación de pago
       setLoading(false);
       navigate("/final-status");
     }, 2000);
