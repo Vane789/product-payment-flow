@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { OrderEntity } from './order.entity';
 
 @Entity('payment')
 export class PaymentEntity {
@@ -31,4 +32,7 @@ export class PaymentEntity {
 
   @Column()
   acceptTerms: boolean;
+
+  @ManyToOne(() => OrderEntity, (order) => order.payment)
+  order: OrderEntity;
 }

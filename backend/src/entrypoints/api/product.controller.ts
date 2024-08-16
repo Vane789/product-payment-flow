@@ -23,12 +23,4 @@ export class ProductController {
         ),
     );
   }
-
-  @Post()
-  async create(@Body() createProductDto: any): Promise<Object> {
-    const data = { recibido: 'ok' };
-    console.log('Received data:', createProductDto);
-
-    return data;
-  }
 }

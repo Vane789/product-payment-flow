@@ -6,6 +6,7 @@ import { UserEntity } from '../../domain/entities/user.entity';
 import { ProductService } from '../../application/services/product.service';
 import { ProductController } from '../../entrypoints/api/product.controller';
 import { ProductRepository } from '../../adapters/outbound/repositories/product.repository';
+import { OrderEntity } from 'src/domain/entities/order.entity';
 
 @Module({
   imports: [
@@ -16,12 +17,17 @@ import { ProductRepository } from '../../adapters/outbound/repositories/product.
       username: 'admin',
       password: 'admin',
       database: 'postgres',
-      entities: [PaymentEntity, ProductEntity, UserEntity],
+      entities: [PaymentEntity, ProductEntity, UserEntity, OrderEntity],
       synchronize: false,
     }),
-    TypeOrmModule.forFeature([ProductEntity]),
+    TypeOrmModule.forFeature([
+      PaymentEntity,
+      ProductEntity,
+      UserEntity,
+      OrderEntity,
+    ]),
   ],
-  controllers: [ProductController],
-  providers: [ProductService, ProductRepository],
+  // controllers: [ProductController],
+  // providers: [ProductService, ProductRepository],
 })
 export class DatabaseModule {}
